@@ -1,0 +1,23 @@
+.aboutWrapper {
+    display: flex;
+
+    img {
+        margin-right: 50px;
+    }
+}
+
+.infoWrapper {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        padding: 0;
+        font-size: 20px;
+    }
+}

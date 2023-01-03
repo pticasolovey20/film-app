@@ -1,0 +1,1 @@
+export const prepareGenre = (value:string[]):any => value.toString()

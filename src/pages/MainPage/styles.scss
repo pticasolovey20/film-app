@@ -1,0 +1,24 @@
+.mainTitle,
+.popular {
+    text-align: center;
+}
+
+.mainTitle {
+    font-size: 60px;
+    font-weight: 700;
+    color: #E59C9C;
+    margin-top: 70px;
+    margin-bottom: 5px;
+}
+
+.popular {
+    font-size: 30px;
+    font-weight: 700;
+    color :#fff;
+}
+
+.mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
