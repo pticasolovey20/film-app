@@ -1,4 +1,4 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { ICategoryFilms } from '../types/ICategoryFilms'
 
 export const categoryAPI = createApi({

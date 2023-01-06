@@ -1,4 +1,4 @@
-import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit'
+import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import filmSlice from './slices/filmSlice'
 import {categoryAPI} from '../services/CategoryService'
 
