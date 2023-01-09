@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import filmSlice from './slices/filmSlice'
+import filmByIdSlice from './slices/filmByIdSlice'
 import {categoryAPI} from '../services/CategoryService'
 
 const rootReducer = combineReducers({
     filmSlice,
+    filmByIdSlice,
     [categoryAPI.reducerPath]: categoryAPI.reducer
 })
 

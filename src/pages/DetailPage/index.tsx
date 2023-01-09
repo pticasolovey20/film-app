@@ -1,6 +1,7 @@
-import axios from 'axios'
-import {useEffect,useState} from 'react'
+import {useEffect} from 'react'
 import { useParams } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { fetchFilmsByID } from '../../store/slices/filmByIdSlice'
 import { ContentWrapper } from "../../components/ContentWrapper"
 
 import Star from '../../assets/img/star.svg'
@@ -12,63 +13,47 @@ import "./styles.scss"
 
 const DetailPage: React.FC = () => {
     const {id} = useParams()
-    const [film, setFilm] =  useState<{
-        image: {
-            medium:string,
-        }
-        name: string,
-        rating:{
-            average:number
-        }
-        premiered:string,
-        network: {
-            country:{
-                name:string,
-            }
 
-        }
-        genres: string[],
-        summary:string,
-    }>()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const fetchFilmsByID = async()=> {
-            const {data} = await axios.get('https://api.tvmaze.com/shows/' + id)
-            setFilm(data)
-        }
-        fetchFilmsByID()
-    },[id])
+        dispatch(fetchFilmsByID(id))
+    },[dispatch,id])
+
+    const {films} = useAppSelector((state) => state.filmByIdSlice)
 
     return (
         <ContentWrapper>
-            {film && <div className='detailPage'>
-                        <img src={film.image.medium} alt='img' className='image'/>
+            {Object.keys(films).length > 0 && <div className='detailPage'>
+                        <img src={films.image.medium} alt='img' className='image'/>
                         <div className='detailWrapper'>
                             <div className='title'>
-                                {film.name}
+                                {films.name}
                                 <div className='average'>
-                                    {film.rating.average && <img src={Star} alt='star'/>}
-                                {film.rating.average && film.rating.average + '/10'}
+                                    {films.rating.average && <img src={Star} alt='star'/>}
+                                    {films.rating.average && films.rating.average + '/10'}
+                                </div>
                             </div>
-                        </div>
                             <div>
                                 PREMIERED: 
-                                <span className='item-1'>{film.premiered && prepareDate(film.premiered)}</span>
+                                <span className='item-1'>{films.premiered && prepareDate(films.premiered)}</span>
                             </div>
                             <div>
                                 COUNTRY: 
-                                <span className='item-2'>{film.network && film.network.country.name}</span>
+                                <span className='item-2'>{films.network && films.network.country.name}</span>
                             </div>
                             <div>
                                 GENRE: 
-                                <span className='item-3'>{film.genres && prepareGenre(film.genres).toUpperCase()}</span>
+                                <span className='item-3'>{films.genres && prepareGenre(films.genres).toUpperCase()}</span>
                             </div>
                             <div>
                                 DESCRIPTION: 
-                                <span className='item-4'>{film.summary && film.summary}</span>
+                                <span className='item-4'>{films.summary && films.summary}</span>
                             </div>
                         </div>
                     </div>}
+
+                    
         </ContentWrapper>
     )
 }

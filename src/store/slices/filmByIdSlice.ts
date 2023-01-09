@@ -5,12 +5,12 @@ import { IFilms } from "../../types/IFilms"
 interface FilmState { 
     loading: boolean;
     error: string;
-    films: IFilms[];
+    films: IFilms;
 }
 
-export const fetchFilms = createAsyncThunk('films/fetchFilms',async (param,thunkAPI) => {
+export const fetchFilmsByID = createAsyncThunk('films/fetchFilmsById',async (id: string | undefined,thunkAPI) => {
     try {
-        const {data} = await axios.get<IFilms[]>('https://api.tvmaze.com/shows')
+        const {data} = await axios.get<IFilms[]>(`https://api.tvmaze.com/shows/${id}`)
         return data
     } catch (error: unknown) {
         if(error instanceof AxiosError) {
@@ -22,27 +22,27 @@ export const fetchFilms = createAsyncThunk('films/fetchFilms',async (param,thunk
 const initialState = {
     loading: false,
     error: '',
-    films: [],
+    films: {},
 } as FilmState
 
-const filmSlice = createSlice({
-    name: 'films',
+const filmByIdSlice = createSlice({
+    name: 'filmsById',
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchFilms.pending.type]: (state) => {
+        [fetchFilmsByID.pending.type]: (state) => {
             state.loading = true;
         },
-        [fetchFilms.fulfilled.type]: (state, action: PayloadAction<IFilms[]>) => {
+        [fetchFilmsByID.fulfilled.type]: (state, action: PayloadAction<IFilms>) => {
             state.loading = false;
             state.films = action.payload;
             state.error = '';
         },
-        [fetchFilms.rejected.type]: (state, action: PayloadAction<string>) => {
+        [fetchFilmsByID.rejected.type]: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload
-        }
+        },
     }
 })
 
-export default filmSlice.reducer
+export default filmByIdSlice.reducer

@@ -12,6 +12,9 @@ export interface IFilms {
             name: string,
         },
     }
-    rating: number,
+    rating: {
+        average : number,
+    },
+    summary: string,
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { ContentWrapper } from '../../components/ContentWrapper'
 import { CategoryCardItem } from '../../components/CategoryCardItem'
 import { categoryAPI } from '../../services/CategoryService'
@@ -8,7 +8,7 @@ import './styles.scss'
 const CategoriesPage = () => {
     const [inputValue, setInputValue] = useState('Fantasy')
 
-    const handleChange = (e:any):void => {
+    const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
     }
     const {data:category} = categoryAPI.useFetchCategoryQuery(inputValue)
@@ -18,7 +18,9 @@ const CategoriesPage = () => {
             <div className='topWrapper'>
                 <h2>Selected category: <span>{inputValue}</span></h2>
                 <div className="inputWrapper">
-                    <input placeholder="Please enter the category name in English. Example: Animals" onChange={handleChange}/>
+                    <input 
+                        placeholder="Please enter the category name in English. Example: Animals" 
+                        onChange={handleChange}/>
                 </div>
             </div>
             <div className='categoryContainer'>
