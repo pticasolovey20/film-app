@@ -9,6 +9,7 @@ import { prepareDate } from '../../utils/prepareDate'
 import { prepareGenre } from '../../utils/prepareGenre'
 
 import "./styles.scss"
+import { prepareSummary } from '../../utils/prepareSummary'
 
 
 const DetailPage: React.FC = () => {
@@ -48,7 +49,7 @@ const DetailPage: React.FC = () => {
                             </div>
                             <div>
                                 DESCRIPTION: 
-                                <span className='item-4'>{films.summary && films.summary}</span>
+                                <span className='item-4'>{films.summary && prepareSummary(films.summary)}</span>
                             </div>
                         </div>
                     </div>}
