@@ -1,0 +1,1 @@
+export const prepareDate = (value:string):string => new Date(value).getFullYear().toString()

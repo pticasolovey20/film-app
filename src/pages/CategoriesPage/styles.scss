@@ -1,0 +1,41 @@
+.topWrapper {
+    display: flex;
+    width: 1050px;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.inputWrapper {
+    display: flex;
+    width: 400px;
+    align-items: center;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid black;
+
+    input { 
+        width: 70%;
+        color: #333;
+        font-weight: 600;
+        border: none;
+        margin-left: 24px;
+    }
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: 400;
+
+    span {
+        font-size: 30px;
+        font-weight: 600;
+        color: #E59C9C;
+    }
+}
+
+.categoryContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
