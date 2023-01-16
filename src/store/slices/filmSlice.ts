@@ -41,7 +41,7 @@ const filmSlice = createSlice({
         [fetchFilms.rejected.type]: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload
-        }
+        },
     }
 })
 

@@ -20,6 +20,7 @@ const Header = () => {
                             <NavLink className={setActive} to='/'>Home</NavLink>
                             <NavLink className={setActive} to='/categories'>Categories</NavLink>
                             <NavLink className={setActive} to='/about'>About Us</NavLink>
+                            <NavLink className={setActive} to='/search'>Search</NavLink>
                     </nav>
                 </div>
             </Box>

@@ -1,31 +1,30 @@
-import { ChangeEvent, useState } from 'react'
+import {useEffect} from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { fetchFilmsByCategory } from '../../store/slices/filmByCategorySlice'
 import { ContentWrapper } from '../../components/ContentWrapper'
 import { CategoryCardItem } from '../../components/CategoryCardItem'
-import { categoryAPI } from '../../services/CategoryService'
 import { ICategoryFilms } from '../../types/ICategoryFilms'
 import './styles.scss'
 
 const CategoriesPage = () => {
-    const [inputValue, setInputValue] = useState('Fantasy')
+    const dispatch = useAppDispatch()
 
-    const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value)
-    }
-    const {data:category} = categoryAPI.useFetchCategoryQuery(inputValue)
+    const category = 'Fantasy'
+
+    useEffect(()=> {
+        dispatch(fetchFilmsByCategory(category))
+    })
+
+    const {films} = useAppSelector((state) => state.filmByCategorySlice)
 
     return (
         <ContentWrapper>
             <div className='topWrapper'>
-                <h2>Selected category: <span>{inputValue}</span></h2>
-                <div className="inputWrapper">
-                    <input 
-                        placeholder="Please enter the category name in English. Example: Animals" 
-                        onChange={handleChange}/>
-                </div>
+                <h2>Selected category: <span>{category}</span></h2>
             </div>
             <div className='categoryContainer'>
-                {category && category.map((film: ICategoryFilms) => (
-                    <CategoryCardItem film={film} key={film.show.id}/>
+                {films.length > 0 && films.map((film: ICategoryFilms, index) => (
+                    <CategoryCardItem film={film} key={index}/>
                 ))}
             </div>
         </ContentWrapper>

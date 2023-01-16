@@ -21,7 +21,7 @@ const MainPage: React.FC = () => {
             <p className='popular'>The most popular movie portal </p>
             <ContentWrapper>
                 <div className='mainContainer'>
-                    {films && films.slice(0, 8).map((film: IFilms) => (
+                    {films.length > 0 && films.map((film: IFilms) => (
                         <MainCardItem film={film} key={film.id}/>
                     ))}
                 </div>

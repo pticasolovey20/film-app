@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk,PayloadAction } from "@reduxjs/toolkit"
 import axios, {AxiosError} from 'axios'
 import { IFilms } from "../../types/IFilms"
 
-interface FilmState { 
+interface FilmByIdState { 
     loading: boolean;
     error: string;
     films: IFilms;
@@ -23,7 +23,7 @@ const initialState = {
     loading: false,
     error: '',
     films: {},
-} as FilmState
+} as FilmByIdState
 
 const filmByIdSlice = createSlice({
     name: 'filmsById',
